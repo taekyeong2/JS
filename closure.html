@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>closure</title>
+</head>
+<body>
+    <p>전역 변수를 사용한 counting</p>
+    <button id="inclease">+</button>
+    <p id="count">0</p>
+
+    <script>
+        //실행되는 시점을 기억하는 함수
+        var incleaseBtn = document.getElementById('inclease')
+        var count = document.getElementById('count')
+
+        function Counter(temp){
+            var counter = 0;
+
+            //클로저
+            return function(){
+                counter = temp(counter)
+                return counter;
+            }
+        }
+
+        function increase(n){
+            return ++n;
+        }
+         
+        function decrease(n){
+            return --n;
+        }
+
+        const increaser = Counter(increase);
+        console.log(increaser()); //return ++n
+        console.log(increaser());
+        console.log(increaser());
+        console.log(increaser());
+        console.log(increaser());
+
+
+        const decreaser = Counter(decrease);
+        console.log(decreaser()); //return --n
+        console.log(decreaser());
+        console.log(decreaser());
+        console.log(decreaser());
+        console.log(decreaser());
+
+
+        //클로져 사용 => 정보를 숨기고 싶을때 쓴다.-----------------------
+        // var incleaseBtn = document.getElementById('inclease')
+        // var count = document.getElementById('count')
+
+        // let inclease = (function(){
+        //     //두번째 부턴 이걸 인식안하고 리턴 함수를 계속 실행한다.
+        //     let counter = 0; 
+        //     return function(){
+        //         return counter++;
+        //     }
+        // }());
+
+        // incleaseBtn.onclick = function(){
+        //     count.innerHTML = inclease();
+        // }
+
+        //전역변수 사용------------------------------------------------
+        // var incleaseBtn = document.getElementById('inclease')
+        // var count = document.getElementById('count')
+
+        // var counter = 0;
+        // function inclease(){
+        //     return ++counter
+        // }
+
+        // incleaseBtn.onclick = function(){
+        //     count.innerHTML = inclease();
+        // }
+
+        //var counter = 2; => 위험/ 값이 갑자기 바뀔 수 있다.
+
+
+        /*------------------------------------------------------------
+        function test(){
+            let temp = 0;
+            temp++;
+        }
+        test(); //1 -> (클로저)1
+        text(); //1 -> (클로저)2
+        */
+
+        // function outerFunc(){
+        //     var x = 10;
+        //     var innerFnc = function(){
+        //         console.log(x);
+        //     }
+        //     innerFnc();
+        // }
+        // outerFunc();  //스코프?
+    </script>
+</body>
+</html>

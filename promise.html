@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //비동기(데이터 올때까지 딴일 함), 동기(데이터 올때까지 기다림)
+
+        //동기
+        // function sync(callback){
+        //     callback();
+        // }
+        // sync(function(){
+        //     console.log("동기처리");
+        // });
+
+        //비동기
+        // function async(print, timeout){
+        //     setInterval(print, timeout);
+        // }
+        // async(()=> console.log("비동기"), 3000)  
+
+        //--------------------------------------------------------------
+        //promise (resolve => .then)(reject => .catch)
+        let myPromise = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                let result = "promiseSucess"
+                resolve(result)
+            }, 3000)
+        })
+        myPromise.then((message)=>{
+            console.log(message)
+        })
+        .catch(failMassage =>{
+            console.log(failMassage)
+        })
+
+        // async - await
+        async function temp(){ //비동기
+
+            let promise = new Promise((resolve, reject)=>{
+                setTimeout(()=> {
+                    resolve('완료')
+                    console.log('1')
+                    console.log('2')
+                }, 5000)
+            })
+            
+            //await => 안에 있는거 다 실행하고 실행하겠다는 뜻 (= .then의 역할)
+            //await가 없으면 기다리지 않고 그냥 실행
+            let result = await promise;  
+
+            alert(result)
+
+        }
+        temp();
+
+
+    </script>
+</body>
+</html>

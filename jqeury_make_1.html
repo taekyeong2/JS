@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+@font-face {
+    font-family: 'HSGyeoulNoonkott20';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HSGyeoulNoonkott20.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+    * {
+        font-family: 'HSGyeoulNoonkott20';
+        font-size: xx-large;
+    }
+
+    .green{
+        background-color: rgb(101, 173, 101)
+    }
+    .bv{
+        color: rgb(155, 110, 197);
+    }
+</style>
+<body>
+    <div id="attech">
+    </div>
+
+    <input type="text" value="jquery" id="test">
+
+    <script>
+        //prop => 태그 상태 속성값 (checked, selected, radioBtn...)
+        //toggle => 상태변경할때 사용
+        //<div class='green bv'>toggle</div>
+        let div = $('<div>').addClass('green').text('toggle').addClass('bv')
+        $('body').append(div) 
+
+        //클래스에 green이 있으면 green을 지워라 (존재하면 지우고)
+        $('.green').toggleClass('green') //removeClass
+        //green이 없으면 green추가 (존재하지 않으면 생성)
+        $('.bv').toggleClass('green') //addClass
+
+
+
+        $('#attech').append(
+            $('<label>')
+                .text('내가 처음 만든 태그') //textContent
+                .attr({  //setAttribute()
+                    'id' : 'firstLabel',  
+                    'class' : 'firstClass'
+                })
+        )
+        console.log($('#test').val())
+        $('#test').val('자바스크립트')
+        $('#test').addClass('inputClass')
+        $('#test').removeClass('inputClass')
+        $('#text').removeAttr('내가 지우길 원하는것.')
+
+        //innerHTML
+        console.log($('#attech').html(
+            '<a href=\"#\">클릭</a>'
+        )); 
+
+
+
+    </script>
+</body>
+</html>

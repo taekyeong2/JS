@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세페이지</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: 'yg-jalnan';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    * {
+        font-family: 'yg-jalnan';
+        font-size: xx-large;
+    }
+    a {
+        display: block;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12" id="list">
+
+            </div>
+        </div><br>
+        <div class="row">
+            <button class="btn btn-dark btn-sm" type="button" onclick="companyInfo()">
+                영화사조회
+            </button>
+        </div>
+    </div>
+    <script>
+        let movieCode = location.href.split("?")[1];
+        console.log(location.href.split("?"))
+        let companyCd;
+        let movieNm;
+
+        window.onload = function(){
+            let url =`http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=${movieCode}`
+            fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                let movieInfo = data.movieInfoResult.movieInfo;
+                console.log(movieInfo)
+
+                let board = document.getElementById('list')
+                
+                let pTag = document.createElement('p')
+                pTag.textContent = movieInfo.movieNm;
+                movieNm = movieInfo.movieNm;
+                board.append(pTag);
+
+                let pTag2 = document.createElement('p')
+                pTag2.textContent = movieInfo.movieNmEn;
+                board.append(pTag2)
+
+
+                let pTag3 = document.createElement('p')
+                pTag3.textContent = movieInfo.openDt;
+                board.append(pTag3)
+
+
+                let pTag4 = document.createElement('p')
+                pTag4.textContent = movieInfo.directors[0].peopleNm;
+                board.append(pTag4)
+
+                for(let actor of movieInfo.actors){
+                    let aTag = document.createElement('a')
+                    aTag.innerText = actor.peopleNm;
+                    let urlInfo = `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${actor.peopleNm}`
+                    aTag.setAttribute('href', urlInfo)
+                    board.append(aTag)
+                }
+                btn = document.createElement('a');
+                btn.setAttribute('href', 'javascript:history.back()')
+                btn.innerText ="← 뒤로가기"
+                btn.setAttribute('style', 'color:red;')
+                board.append(btn)
+
+                console.log(movieInfo.companys[0].companyCd)
+                companyCd = movieInfo.companys[0].companyCd;
+
+        
+            })
+
+        }
+
+        function companyInfo(){
+            console.log(companyCd)
+            location.href=`company.html?${companyCd}`;
+        }
+        
+    </script>
+</body>
+</html>

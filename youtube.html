@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: 'yg-jalnan';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    * {
+        font-family: 'yg-jalnan';
+        font-size: xx-large;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div id="media">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        let url = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyCh_ARqFdsVGZq3rJGLoW0Q4GiXJzByoic&part=snippet&type=video&maxResults=20&videoEmbeddable=true';
+        fetch(url)
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            let item = data.items;
+
+            console.log(item[0].snippet.description);
+            console.log(item[0].snippet.title);
+            console.log(item[0].snippet.thumbnails.high.url);
+
+            for(let youtube of item){
+                // let ptag = document.getElementById('p').innerHTML =
+                // `🎊<label>${youtube.snippet.description}</label>
+                //     🎉<label>${youtube.snippet.title}</label>
+                //     ✨<label>${youtube.snippet.thumbnails.high.url}</label>`;
+
+                    let imgTag = document.createElement('img');
+                    imgTag.setAttribute('src',`${youtube.snippet.thumbnails.high.url}`)
+                    
+                    document.getElementById('media').append(imgTag);
+            }
+        });
+    </script>
+</body>
+</html>

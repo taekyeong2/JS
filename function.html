@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //일반함수
+        function sum(x, y) {
+            return x + y;
+        }
+        //alert(sum(1,2));
+
+        let total = sum(3, 4);
+        console.log(total);
+
+        //익명함수 : 이름이 없는 함수, 이름없이 바로 선언과 동시에 변수안에 들어감
+        const func = function () {
+            console.log('함수 내부 코드입니다.')
+        }
+        func();
+        console.log(typeof func);
+        console.log(func);
+        console.log(alert); //[native code] => 숨김
+
+
+        //나머지 매게 변수 (... => 매게변수가 몇개일지 모를때)
+        function sample(...items) { // ...items => 배열
+            console.log(items);
+            console.log(typeof items);
+            //배열인지 확인
+            console.log(Array.isArray(items))
+
+        }
+        // sample(1); //[1], object => 배열인데 객체로나옴 =>Array.isArray() 사용
+        // sample(1,2);
+        // sample(1,2,3);
+
+
+        //나머지 매게변수를 활용한 최소값 구하기
+        //items의 첫번째 값 넣고 비교
+        function min(...items) {
+            let output = items[0];
+
+            //for in => 배열 또는 객체의 인덱스 번호 
+            //Array = {1, 2, 3, 4, 5, 6, 7}
+            //0~6까지 값 출력
+            // for(let index in items){
+            //     if(output > items[index]){
+            //         output = items[index];
+
+            //for of
+            //배열에 하나씩 꺼내와서 item에 담아준다.
+            for (let item of items) {
+                if (output > item) {
+                    output = item;
+                }
+            }
+            return output;
+        }
+
+        console.log(`최소값 = ${min(52,33435,45454,22,34)}`);
+
+
+        //매게변수의 자료형에 따라 다르게 작동하는 min 함수
+        //first => first의 자료형의 종류에 따라 최소값 구하는 방식이 달라짐
+        function min2(first, ...items){ 
+            let outputh;
+            let item;
+
+            //매게변수 자료형에 따라 조건 분기하기 
+            //first가 배열이라면 first내부에서 최소값 구하기
+            if(Array.isArray(first)){
+                output = first[0]
+                item = first;
+            
+            //first가 number라면 first기준으로 최소값 구하기
+            }else if(typeof(first)=='number'){
+                output = first;
+                item = items;
+            }
+
+            for(let idx in item){
+                if(output > item[idx]){
+                    output = item[idx];
+                }
+            }
+            return output;
+        }
+
+        console.log(`최소값2 : ${min2([3,4,6,3,77,5,3,22,4],0)}`); 
+        console.log(`최소값2_1 : ${min2(7845,245435,86865,44453,575474,24323)}`);
+
+
+        //매개변수-> 전개 연산자(...)
+        let arr = [343,565,33,546,8,7976];
+
+        function sample2(...items){
+            console.log(items);
+        }
+        console.log('전개연산자 안 쓰는 경우');
+        sample2(arr); 
+        console.log('전개 연산자를 쓰는 경우')
+        sample2(...arr)
+        
+        //기본 함수의 매개변수
+        function info(name, salary = 9000, hours =40){
+            console.log(`${name} 님의 급여 정보`)
+            console.log(`-시급 : ${salary}원`)
+            console.log(`-근무 시간 : ${hours}`)
+            console.log(`-급여 : ${salary * hours}`)
+        }
+
+        info('김또치');
+        console.log("==========")
+        info('고길동', 9500)
+        console.log("==========")
+        info('고희동', 10000, 52)
+
+        
+        //윤년 구하기
+        function isLeapYear(year = new Date().getFullYear()){
+            console.log(`매개변수 year : ${year}`)
+            // == : 데이터 값만 비교 
+            //=== : 데티어 타입, 값 비교
+            return(year % 4 == 0) && (year % 100 !== 0) || (year % 400 === 0)
+        }
+
+        console.log(`올해는 윤년일까 === ${isLeapYear()}`)
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //callback함수 : 함수안에 또다른 함수 부를때 => 매개변수로 함수를 호출하는 방식
+        function callThreeTimes(callback){ // => 2)
+            for(let i =0; i<3; i++){
+                callback(i)
+            }
+        }
+
+        function print(i){ // => 3)
+            console.log(`${i}번째 함수 호출`)
+        }
+        
+        callThreeTimes(print); // => 1)
+
+
+        //callback함수(익명함수)
+        //callback = function(i){}
+        callThreeTimes(function(i){
+            console.log(`${i}번째 함수 호출`)
+        })
+    </script>
+
+    <script>
+        //콜백 함수 사용하는 함수 
+        //1. forEach(배열만 사용할 수 있는 함수)
+        let numbers = [324,5453,6564,777,4563];
+
+        //배열.forEach(function(element, index, 배열){})
+        numbers.forEach(function(el, idx, ary){
+            //el(element, value) : 배열 요소 한개 // 324, 5453, ...
+            //idx(index) : 배열 인덱스 한개 //0, 1, 2, ...
+            //ary(Arra7) : 배열 통째로 가져옴 //numbers
+            console.log(`${idx}번째 요소 ${el}`)
+            console.log(`${ary}`)
+        })
+    </script>
+
+    <script>
+        //2.map(): 콜백 함수를 통해 새로운 배열 만드는 함수
+        let no = [3,4,25,4,66,4]
+
+        //각 자리 수 가 제곱인 데이터를 다시 생성
+        no = no.map(function(el, idx, ary){
+            return el*el
+        })
+
+        //요소 하나씩 출력
+        no.forEach(console.log)
+    </script>
+
+    <script>
+        //3. filter : 내가 원하는 조건에 맞는 애들만 골라서 새로운 배열 만드는것
+        //리턴 하는 값이 true인 데이터로 새로운 배열 형성
+        no = [0,1,23,3,4,5,6,7,8];
+        
+        //짝수인 데이터만 골라서 새로운 배열
+        let evenNumber = no.filter(function(el){
+            return el%2 == 0
+        })
+        console.log(`원래 배열 : ${no}`)
+        console.log(`짝수만 추출 : ${evenNumber}`)
+    </script>
+
+    <script>
+        //callback함수 => 매개변수에 들어가는 함수
+        function test(temp){
+            //console.log(temp);
+            temp();
+        }
+
+        //test(1);
+        //test('test');
+
+        function innerFunc(){
+            console.log('test 안으로 들어왔다')
+        }
+
+        test(innerFunc)
+
+        test(function(){
+            console.log('나는 익명함수, test안으로 들어왔다')
+        })
+
+        /* ajax => 비동기 방식?
+        fetch(url) -> 함수  //비동기(자바스크립트는 자바와 달리 스레드(일꾼)가 한개 => 일을 더 효율적이게 처리위해.)
+                             비동기 방식을 위해 필요한건 콜백함수
+        .then(result => JSON.parse(result)) -> 함수  //동기 
+        .then(data => console.log(data)) -> 함수     
+
+        **callback함수 : 비동기방식, 동기방식 통신을 위해 만들어짐
+                         함수 호출할때 또다른 함수 호출
+        **promise객체
+
+        */
+    </script>
+</body>
+</html>

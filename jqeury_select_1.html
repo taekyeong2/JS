@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1>제이쿼리</h1>
+    <h1 id="tit">선택자</h1>
+    <h1 class="tit">선택자2</h1>
+    <h3>인접 선택자</h3>
+
+
+
+    <script>
+        $(document).ready(function () { //window.onload, document.addEven....("DOM...")
+            // $('#tit').css('background-color', 'pink')
+            // .css('border', '2px solid black')
+
+            // $('.tit').css(
+            //     {
+            //         'background-color': 'grey', 
+            //         'border': '2px solid blue'
+            //     }
+            //     )
+            //$('h1').css('background-color', 'grey')
+
+            $('#tit, h3').css('background-color', 'blue');
+            $('h1.tit').css('background-color', 'red');
+
+            //document.getElementById('tit').nextSibling // tit기준 뒤에 있는애
+            $('#tit').next().css('color', 'blue')
+            //document.getElementById('tit').previousSibling //tit기준 앞에 있는애
+            $('#tit').prev().css('color', 'blue')
+
+
+        })
+    </script>
+</body>
+
+</html>

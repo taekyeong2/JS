@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test">
+        테스트
+        <span style="display: none;">숨었다.</span>
+    </div>
+    <script>
+        let div = document.getElementById('test')
+        //innerText, TextContent, innerHTML
+        console.log(div.innerHTML) // 전체 태그
+        console.log(div.innerText) //화면봤을때 보여지는 부분의 텍스트
+        console.log(div.textContent) //div가 가지고 있는 텍스트 전뷰 
+
+        let a = 100;
+        let h1 = document.createElement('h1')
+        h1.innerHTML = `자바스크립트 ${a} `;
+        div.append(h1)
+
+        // div.innerHTML = `<h1>자바스크립트<h1>`;  => 기존에 있는 태그덮어씌운다
+
+    </script>
+</body>
+</html>

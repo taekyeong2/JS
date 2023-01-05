@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1. 아래코드를 foreach로 변경
+        const array = ['사과', '배', '귤', '바나나']
+        console.log('#for in 반복문')
+        for(let i in array){
+            console.log(i)
+        }
+        console.log('#foreach')
+        array.forEach((el,idx) => {
+            console.log(el)
+            console.log(idx)
+        })
+        
+        console.log('#for of 반목분')
+        for(let i of array){
+            console.log(i)
+        }
+        console.log('#foreach')
+        array.forEach(el => {
+            console.log(el)
+        })
+
+        //2. filter 함수의 콜백 함수 부분을 채워서 
+        //1) 홀수만 호출, 2) 100이하의 수만 추출, 3)5로 나눈 나머지가 0인 수 추출
+        let numbers = [273,25,75,52,103,52,347,45,76]
+
+        //filter정의
+        //1)
+        let odd = numbers.filter(el => {
+            return el%2 == 1
+        })
+        //2)
+        let hundred = numbers.filter(el => {
+            return el <= 100
+        })
+        //3)
+        let fiveMulti = numbers.filter(el => {
+            return el%5 == 0
+        })
+
+        //해당부분 구현
+        console.log(numbers)
+        console.log(`홀수 : ${odd}`)
+        console.log(`100이하 : ${hundred}`)
+        console.log(`5의 배수 : ${fiveMulti}`)
+
+    </script>
+</body>
+</html>

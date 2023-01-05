@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+
+<body>
+    <script>
+        // 그냥 this는 윈도우
+        console.log(this)
+        console.log(window)
+        console.log(this === window)
+
+        //단순 함수 호출일 경우에는 window객체 (전역 객체 )호출
+        let fuc1 = () => {
+            console.log('fnc1: ', this)
+            let innerFuc1 = () => {
+                console.log('fnc2: ', this)
+            }
+            innerFuc1();
+        }
+        fuc1()
+
+        //객체에서의 this (()=> : 는 콜백함수에서 쓰는거, 그래서 콜백함수의 this라서 윈도우)
+        var person = {
+            name: 'lee',
+            printName: function () {  //=> 객체 안의 익명함수의 this : 객체자신
+                console.log('person의 name : ', this.name)
+            }
+        }
+        person.printName()
+
+        console.log("======================")
+
+        var value = 1;
+        var obj = {
+            value : 100,
+            //메소드
+            fuc2 : function(){ //객체안에서의 메소드 this는 객체자신
+                console.log('fnc2 this : ', this);
+                console.log('fnc2 this.value : ', this.value)
+                
+                //함수
+                function innerFuc2(){ //객체 메소드안의 함수의 this는 윈도우
+                    console.log('innerFuc2 this : ', this)
+                    console.log('innerFuc2 this.value : ', this.value)
+                }
+                innerFuc2();
+            }
+
+        }
+        obj.fuc2();
+
+        /*
+        javascript != (함수 == 메소드)
+        javascript에서는 함수와 메소드는 다른 성질 
+        함수는 독립적인 애들한테 부르는 말 (this -> window객체)
+        메소드는 객체에 등록되어 있는 함수 (this -> 객체)
+        (똑같이 생겼지만 위치에 따라 함수, 메소드 다르게 구분)
+        */
+
+        let obj2 = {}; //비어있는 객체를 생성
+
+        obj2.act = function(){ //act필드를 만들면서 익명함수 만듦
+            this.value = 'default value'; //obj2
+
+            function innerAct(){
+                this.value = 'innerAct Value'; //윈도우
+                console.log('this.value: ', this.value) //'innerAct Value'
+            }
+            function innerReact(caller){
+                console.log(this); //윈도우
+                console.log(caller); //obj2(obj2에 종속되어있는 메소드 안에서 부른 this)
+                caller.value = "innerReact value"
+                console.log("----this.value: ", this.value) //'innerAct Value'
+                console.log("++++caller.value: ", caller.value) // 'innerReact value'
+            }
+            innerAct();
+        
+            console.log("obj 객체의 this.value: ", this.value) //'default value'
+            innerReact(this) //obj2 (caller가 처음 시작된곳)
+            console.log('obj 객체의 this.value: ', this.value) //"innerReact value"
+        }
+        obj2.act();
+        console.log(this.value) // 'innerAct Value'
+
+    </script>
+</body>
+
+</html>

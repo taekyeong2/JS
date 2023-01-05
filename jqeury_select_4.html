@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+@font-face {
+    font-family: 'HSGyeoulNoonkott20';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HSGyeoulNoonkott20.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+    * {
+        font-family: 'HSGyeoulNoonkott20';
+        font-size: xx-large;
+    }
+
+    a {
+        display: block;
+    }
+</style>
+
+<body>
+    <div id="wrap">
+        <form>
+            <p id="zone1">
+                <select id="course" name="course">
+                    <option value="opt1">옵션 1</option>
+                    <option value="opt2" selected>옵션 2</option>
+                    <option value="opt3">옵션 3</option>
+                </select>
+                <p id="zone2">
+                    <input type="checkbox" name="hobby1" value="독서">독서
+                    <input type="checkbox" name="hobby2" value="자전거" checked>자전거
+                    <input type="checkbox" name="hobby3" value="등산">등산
+                </p>
+                <p id="zone3">
+                    <input type="radio" name="gender" value="male">남성
+                    <input type="radio" name="gender" value="female" checked>여성
+                </p>
+            </p>
+        </form>
+    </div>
+    <script>
+        //prop 사용했을때         
+        let result = $('#zone2 :nth-child(2)').prop('checked', false)
+        console.log(result)
+        let selResult = $('#course').prop('selectedIndex')
+        console.log(selResult)
+
+        //prop안썼을때
+        let zone1 = $('#zone1 :selected').val();
+        console.log(zone1);
+
+        let zone2 = $('#zone2 :checked').val();
+        console.log(zone2)
+
+        let zone3 = $('#zone3 :checked').val();
+        console.log(zone3)
+    </script>
+</body>
+
+</html>

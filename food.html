@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>food</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+    @font-face {  
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+   }  
+   *{
+    font-family: 'yg-jalnan';
+    font-size: xx-large;
+   }
+</style>
+<body>
+    <input type="text" id="location">
+    <button type="button" id="btn" class="btn btn-primary" onclick="findFood()">검색</button>
+    <script>
+        function findFood(){
+            let loc = document.getElementById('location').value;
+            let url = `https://www.daegufood.go.kr/kor/api/tasty.html?mode=json&addr=${loc}`
+            fetch(url,{
+                mode:'cors'
+                //크로스오리진 문제 https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-CORS-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%F0%9F%91%8F
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+        }
+    </script>
+</body>
+</html>

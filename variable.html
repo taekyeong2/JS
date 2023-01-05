@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <!-- 
+            value => 태그에다가 값(input태그)
+            text/textContent  -->
+    
+    <script>
+
+        //console.log(i);
+        console.log(j);  //선언을 밑에서 했지만 위에서 사용(윈도우객체에 등록) => 호이스팅
+
+        
+        let i=0;  //블럭단위 함수단위 (선언하고 사용)
+        var j=0; //전역에서 사용가능 (window객체에 j등록 =>어디서 선언하든 사용가능)
+
+        console.log(window);
+        console.log(window.j);
+
+
+        //{} => 하나의 블록을 의미, {}를 벗어나면 메모리에서 사라짐
+
+        function temp(){
+            var no = 1;
+            let no2 = 2;
+        } 
+
+        //console.log(no);
+        //console.log(no2); //둘다 함수 밖에서 사용 ㄴ
+       
+        //함수레벨, 블록레벨
+        let pi = 3.14;
+        console.log(pi)
+
+        //let pi = 1111  => 오류남
+        //블록레벨
+        {
+            let pi = 3.14592 //let의 변수이름을 똑같이 쓸 경우에 {}써서 일회성으로 사용 가능
+            console.log(pi);
+        }
+
+        var a = 0;
+        var a = 10; //위에 있는 var a가 사라짐 
+
+        //백틱 (``) : 내가 입력한 리터럴을 한번에 표현 
+        //Stirng 문자열 합치기
+        console.log('파이 값은 '+ pi);
+
+        //백틱을 활용해서 문자열 만들기
+        console.log(`파이값은 ${pi}`);
+        console.log(`파이값은 `, pi);
+
+
+        //백틱 태그 만들기
+        document.querySelector('body')
+        .append(
+            document.createElement('div').innerHTML
+        )
+
+       
+
+
+    </script>   
+
+</body>
+</html>

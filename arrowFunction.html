@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //화살표 함수(애로우 함수)
+        //callback 함수를 단순한 형태의 함수로 표현하기 위함
+        let minus = function (a, b) {
+            console.log(`빼기: ${a-b}`)
+        }
+        minus(5, 2)
+
+        minus = (a, b) => console.log(`빼기: ${a-b}`)
+        minus(5, 2)
+
+        /*
+        화살표 함수 종류 3가지
+        1) () => {...} : 매개변수가 없을때
+        2) x => {...} : 매개변수가 하나만 있을 때
+        3) (x,y) => {...}
+         ! 반환 값이 필요하다면 return문이 반드시 존재해야함
+        */
+
+        //1) 
+        let no = () => {
+            console.log('매개변수 없음')
+        }
+        no();
+
+        //2) 
+        let one = (x) => {
+            return x * x
+        }
+        console.log(one(100))
+
+        let two = x => {
+            return x * x
+        }
+        console.log(one(100))
+
+        //3)
+        let three = (x, y, z) => {
+            return x * y * z;
+        }
+        console.log(three(6, 3, 5))
+
+        let multiplty = (a, b, ...args) => {
+            let result = a + b;
+            for (let i of args) {
+                result *= i
+            }
+            return result;
+        }
+        console.log(`multiplty : ${multiplty(4,3,5,6,3,2,4,4)}`)
+
+
+        let arry = [4, 5, 3, 5, 6, 4, 3, 2, 1, 8, 9, 22, 12, 16];
+        console.log('============')
+        arry.forEach(el => {
+            console.log(el);
+        })
+
+        let ary = arry.map(el => {
+            return el * el;
+        })
+        console.log(`arry 배열 : ${ary}`)
+
+        let ary2 = ary.filter(el => {
+            return el % 3 == 0;
+        })
+        console.log(`filter 배열 : ${ary2}`)
+
+
+        //메소드 체이닝(함수들을 묶어주는(.) 역할)
+        arry.filter(el => el % 2 === 0)
+            .map(el => el * el)
+            .forEach(el => console.log(el))
+
+        //인터넷의 데이터 통신방식
+    </script>
+
+    <script>
+        //타이머 함수
+
+        //설정한 시간 뒤에 실행하세요
+        setTimeout(() => {
+            console.log('1초 후에 실행됩니다.')
+        }, 1000) //1 => 1/10000, 1m/s
+
+        let count = 1;
+
+        //설정한 시간마다 실행하세요
+        let id = setInterval(() => {
+            console.log(`1초마다 실행됩니다. ${count}번째`);
+            count++;
+        }, 1000);
+
+        //타이머 멈추는 기능
+        setTimeout(()=>{
+            console.log('타이머를 종료합니다.')
+            clearInterval(id);
+        }, 5000);
+    </script>
+</body>
+
+</html>

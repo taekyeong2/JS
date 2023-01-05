@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie</title>
+</head>
+ <!-- bootstrap cdn => 인터넷 파일의 경로 가져오는것(https://www.bootstrapcdn.com/의 css의 html link 가져옴) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: 'HSGyeoulNoonkott20';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HSGyeoulNoonkott20.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    *{
+        font-family: 'HSGyeoulNoonkott20';
+        font-size: xx-large;
+    }
+</style>
+<!--
+rest => url 요청할떄 어떠한 방식으로 요청하겠다.
+1) get - 1. url에요청하는 데이터를 실어서 요청
+            localhost/a=5 
+            장점 : 속도가 빠름 / 단점 : 보안이 취약
+            데이터를 전체조회할때 사용
+2) post - 1. Http 메세지에 데이터 실어서 요청
+            localhost/ddd.do
+            장점 : 보안이 강함 / 단점 : 속도가 느림
+            데이터 입력할때 , 보안이 필요한 데이터 조회할때 
+fetch(url, {
+    body: => http안의 메세지에 숨겨서 보냄(post) / JSON.stringify -> 제이슨을 문자열로 변환
+    header: => 보낼때의 옵션 설정(어떤타입으로 보낼거? 제이슨, text ..), Content-Type : application/json 등..
+    method: post
+    mode : cors -> ????
+})
+-->
+<body>
+    <div class="container">
+        <!-- 내가 사용할 영역 -->
+        <div class="row">
+            <!-- 내가 사용할 영역의 사이즈   -->
+            <div class="col-12">
+                <div class="form-group">
+                    <label>영화 검색 날짜</label>
+                    <input type="date" class="form-control" id="movie">
+                    <button class="btn btn-primary" onclick="searchMovie()">검색</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <th>순위</th>
+                        <th>영화제목</th>
+                        <th>누적관객수</th>
+                        <th>영화코드</th>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchMovie(){
+            let movieDate = document.getElementById('movie').value; //yyyy-MM-dd => yyyMMdd
+            //정규 표현식 g(데이터 전체 (2023-01-01)), //(뭘지울지 표시),\(지울거 표시 한번더) , ''(삭제)
+            movieDate = movieDate.replace(/\-/g,'')
+            console.log(movieDate)
+    
+            fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${movieDate}`)
+            .then(res => res.json())
+            .then(data => {
+                let mvList = data.boxOfficeResult.dailyBoxOfficeList
+                let tbd = document.querySelector('tbody');
+                
+                //지우는법
+                tbd.innerHTML = "";
+                // while(tbd.firstChild){
+                //     tbd.removeChild(tbd.firstChild);
+                // }
+
+                for(let list of mvList){
+                    let tr = document.createElement('tr')
+                    let td = document.createElement('td')
+                    let td1 = document.createElement('td')
+                    let td2 = document.createElement('td')
+                    let td3 = document.createElement('td')
+
+                    tr.setAttribute('onclick', 'detail()')
+                    td.textContent = list.rank
+                    td1.textContent = list.movieNm
+                    td2.textContent = list.audiAcc
+                    td3.textContent = list.movieCd
+                    tr.append(td, td1, td2, td3)
+                    tbd.append(tr)
+                }
+            })
+            .catch(data => console.log(data))
+            }
+            function detail(){
+                let url = event.target.parentNode.children[3].textContent
+                location.href=`detailMovie.html?${url}`;
+
+            }
+    </script>
+</body>
+</html>

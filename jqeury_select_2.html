@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: 'yg-jalnan';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    * {
+        font-family: 'yg-jalnan';
+        font-size: xx-large;
+    }
+    a {
+        display: block;
+    }
+</style>
+<body>
+    <script>
+        $(function(){
+            //document.querySelector()
+            $('#list_1').parent().css('border', '2px dotted red')
+            $('#warp li').css('color', 'blue')
+            $('#warp > li > ul > li').css('color', 'red')
+            //document.querySelectorAll()
+            $('#warp li ul').children().css('color', 'yellow')
+
+            
+        })
+    </script>
+    <h1>인접 관계 선택자</h1>
+    <ul id="warp">
+        <li>리스트
+            <ul>
+                <li id="list_1">리스트1_1</li>
+                <li>리스트1_2</li>      
+            </ul>
+        </li>
+        <li>
+            리스트2
+        </li>
+        <li>
+            리스트3
+        </li>
+        <li>
+            리스트4
+        </li>
+    </ul>
+</body>
+</html>
