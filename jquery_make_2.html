@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <style>
+        @font-face {
+            font-family: 'OKCHAN';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/OKCHAN.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            font-family: 'OKCHAN';
+            font-size: xx-large;
+        }
+
+        input {
+            display: block;
+        }
+
+        button {
+            background-color: #E8C582;
+            color: #DE837C;
+        }
+        .btn1 {
+            background-color: #DE7CA5;
+            color: #B9D180;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="add" type="button" onclick="add()">추가</button>
+    <button id="del" type="button" onclick="del()">삭제</button>
+    <div id="delete" class="delete">
+    </div><br>
+
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+    <button class="btn1" type="button">그룹이벤트 버튼</button>
+
+</body>
+<script>
+    let div = $('#delete');
+    let no = 0;
+
+    function add() {
+        div
+            .append(
+                $('<input>')
+                .css({
+                    'background-color': '#486185',
+                    'color': '#D1A485'
+                })
+                .val('추가되는중' + no)
+            )
+            .append(
+                $('<button>').dblclick(function () {
+                    $(this).prev().remove(); //버튼(나)앞에 있는 애 지우기
+                    $(this).remove(); //버튼 지우기
+                })
+                .text('한줄삭제')
+            )
+
+        no++
+    }
+
+
+    function del() {
+        div.empty();
+        no = 0;
+        //remove() - 본인 자신까지 삭제(자식 자동 삭제)
+        //empty() - 선택 요소의 자식을 비워(삭제)하는 것.
+
+    }
+
+    $(".btn1").on({  //그룹이벤트 켜기
+        "click" : function(){
+            alert("쿠키")
+        }
+    })
+    $(".btn1").off("click") //그룹이벤트 끄기
+
+</script>
+
+</html>

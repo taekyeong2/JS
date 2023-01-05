@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+<style>
+    @font-face {
+        font-family: 'bitbit';
+        src: url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'), url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2');
+    }
+
+    * {
+        background-color: #EBF2D9;
+        font-family: 'bitbit';
+        font-size: xx-large;
+        color: #EB925C;
+    }
+
+    button {
+        background-color: #DE7CA5;
+        color: #B9D180;
+    }
+</style>
+
+<body>
+    <p>
+        <button class="btn1">🎈slide Up</button>
+        <button class="btn2">🎊fadeIn</button>
+
+    </p>
+    <p>
+        <button class="btn3">🎈toggleSlide</button>
+
+    </p>
+    <p>
+        <button class="btn4">🎈fadeTo(0,3)</button>
+        <button class="btn5">🎊fateTo(1)</button>
+    </p>
+    <div class="box">
+        <div class="content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus pariatur odio aliquam quae velit, ullam quos commodi saepe blanditiis laboriosam culpa atque adipisci ipsam quasi eaque dolor maxime corrupti iusto.
+        </div>
+    </div>
+    <script>
+        $('.btn2').hide();
+
+        $('.btn1').on(
+            "click",
+            function () {
+                $(".box").slideUp(1000, "linear",
+                    function () {
+                        $(".btn1").hide();
+                        $(".btn2").show();
+                    })
+            }
+        )
+
+        $('.btn2').on(
+            "click",
+            function () {
+                $(".box").fadeIn(1000, "swing",
+                    function () {
+                        $('.btn2').hide();
+                        $('.btn1').show();
+                    })
+            }
+        )
+
+        $('.btn3').on(
+            "click",
+            function () {
+                $('.box').slideToggle(1000, "linear")
+            }
+        )
+
+        $('.btn4').on(
+            "click",
+            function () {
+                $('.box').fadeTo('fast', 0.3)
+            }
+        )
+
+        $('.btn5').on(
+            "click",
+            function () {
+                $('.box').fadeTo('fast', 1)
+            }
+        )
+    </script>
+</body>
+
+</html>

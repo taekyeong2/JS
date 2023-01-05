@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+<style>
+    @font-face {
+        font-family: 'bitbit';
+        src: url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'), url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2');
+    }
+
+    * {
+        font-family: 'bitbit';
+        font-size: xx-large;
+    }
+
+</style>
+<body>
+    <script>
+        /*자바스크립스 형식
+        fetch()
+        .then()
+        .then()*/
+
+        //jqeury
+        $.ajax({
+            url : 'noticeAjaxInsert.do',
+            type : 'post', //method -> get, post
+            data : $('#frm').serialize(), //form태그의 name에 데이터 씌워서 보내준다. 
+            //$('form').serialize() => String
+            //$('form').serializeArray() => Array, [{name1 : value1}, {name2 : value2}]
+
+            // data : 
+            // //객체(JSON형태) ->  문자열로 바꿔줌
+            // JSON.stringify({  
+            //     nNo : "",
+            //     subject : "",
+            //     writer : ""
+            // }), //body, 데이터 전송하는 부분
+
+            dataType : 'json', //받을때 (html, json, text ...)
+            contentType : 'application/json; charset=utf-8', //전송할때  
+                        //application/x-www-form- urlencoded
+            success : function(data){
+                data = JSON.parse(data); //String타입으로 온 데이터를 -> JSON변환(키벨류형식의 객체)
+            },
+            error : function(error){
+                console.log(error);
+            }                  
+        })
+    </script>
+</body>
+</html>

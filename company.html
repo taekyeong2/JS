@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,16 +11,18 @@
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <style>
     @font-face {
-        font-family: 'yg-jalnan';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+        font-family: 'UhBeeRami';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeRami.woff') format('woff');
         font-weight: normal;
         font-style: normal;
     }
 
+
     * {
-        font-family: 'yg-jalnan';
+        font-family: 'UhBeeRami';
         font-size: xx-large;
     }
+
     a {
         display: block;
     }
@@ -37,58 +40,61 @@
         let companyCd = location.href.split("?")[1];
         console.log(location.href.split("?"))
 
-        window.onload = function(){
-            let url =`http://kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyInfo.json?key=f5eef3421c602c6cb7ea224104795888&companyCd=${companyCd}`
+        window.onload = function () {
+            let url =
+                `http://kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyInfo.json?key=f5eef3421c602c6cb7ea224104795888&companyCd=${companyCd}`
             fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.companyInfoResult.companyInfo)
-                let companyInfo = data.companyInfoResult.companyInfo
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data.companyInfoResult.companyInfo)
+                    let companyInfo = data.companyInfoResult.companyInfo
 
 
-                document.querySelector('#list').innerHTML = 
-                `<p>${companyInfo.companyNm}</p>
+                    document.querySelector('#list').innerHTML =
+                        `<p>${companyInfo.companyNm}</p>
                 <p>${companyInfo.companyNmEn}</p>
                 <p>${companyInfo.ceoNm}</p>`
 
 
-                let board = document.getElementById('list')
-                
-                // let pTag = document.createElement('p')
-                // pTag.textContent = companyInfo.companyNm
-                // board.append(pTag);
+                    let board = document.getElementById('list')
 
-                // let pTag2 = document.createElement('p')
-                // pTag2.textContent = companyInfo.companyNmEn
-                // board.append(pTag2)
+                    // let pTag = document.createElement('p')
+                    // pTag.textContent = companyInfo.companyNm
+                    // board.append(pTag);
 
-
-                // let pTag3 = document.createElement('p')
-                // pTag3.textContent = companyInfo.ceoNm
-                // board.append(pTag3)
-
-                for(let movie of companyInfo.filmos){
-                    let aTag = document.createElement('a')
-                    aTag.textContent = `${movie.movieNm} (${movie.companyPartNm})`
-                    aTag.setAttribute('style', 'font-size: 15px;')
-                    let urlInfo =`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${movie.movieNm}`
-                    aTag.setAttribute('href', urlInfo)
-                    board.append(aTag)
-                }
+                    // let pTag2 = document.createElement('p')
+                    // pTag2.textContent = companyInfo.companyNmEn
+                    // board.append(pTag2)
 
 
-                btn = document.createElement('a');
-                btn.setAttribute('href', 'javascript:history.back()')
-                btn.innerText ="뒤로가기"
-                btn.setAttribute('style', 'color:red;')
-                board.append(btn)
+                    // let pTag3 = document.createElement('p')
+                    // pTag3.textContent = companyInfo.ceoNm
+                    // board.append(pTag3)
+
+                    for (let movie of companyInfo.filmos) {
+                        let aTag = document.createElement('a')
+                        aTag.textContent = `${movie.movieNm} (${movie.companyPartNm})`
+                        aTag.setAttribute('style', 'font-size: 15px;')
+                        let urlInfo =
+                            `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${movie.movieNm}`
+                        aTag.setAttribute('href', urlInfo)
+                        board.append(aTag)
+                    }
 
 
-            })
-            .catch(err => console.log(err))
-        
+                    btn = document.createElement('a');
+                    btn.setAttribute('href', 'javascript:history.back()')
+                    btn.innerText = "뒤로가기"
+                    btn.setAttribute('style', 'color:red;')
+                    board.append(btn)
+
+
+                })
+                .catch(err => console.log(err))
+
         }
     </script>
-    
+
 </body>
+
 </html>
