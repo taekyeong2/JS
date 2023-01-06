@@ -41,6 +41,9 @@
                 영화사조회
             </button> -->
         </div>
+        <div id="nextInfo">
+
+        </div>
     </div>
     <script>
         let movieCode = location.href.split("?")[1];
@@ -66,10 +69,33 @@
                         );
                     }
                     $('#list').append(
-                    $('<a>').attr('href', 'javascript:history.back()')
+                    $('<br><a>').attr('href', 'javascript:history.back()')
                             .css('color', 'red')
                             .text('뒤로 가기')
                     );
+
+                    // $('#nextInfo').append(
+                    //     $('<button>')
+                    //     .attr({
+                    //         'type': 'submit',
+                    //         'class' : 'btn btn-dark'
+                    //     })
+                    //     .click(function(){
+                    //         location.href = `company.html?${movieInfo.companys[0].companyCd}`
+                    //     })
+                    //     .text('영화사 조회')
+                    // )
+
+                    let nextBtn = $('<button>')
+                        nextBtn.attr('type', 'submit')
+                        nextBtn.addClass('btn btn-dark')
+                        nextBtn.click(function(){
+                            location.href=`companyJquery.html?${movieInfo.companys[0].companyCd}`
+                        })
+                        nextBtn.text('영화사 조회')
+                    $('#nextInfo').append(nextBtn)
+
+
                 },
                 error : function(error){
                     console.log(error)

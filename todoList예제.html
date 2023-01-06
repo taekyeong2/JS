@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+<style>
+    *{
+        font-family: sans-serif;
+    }
+    #list{
+        border: 1px dotted white;
+        text-align: left;
+        font-size: 20px;
+        background-color: blueviolet;
+        color: white;
+        width: 63.5vw;
+    }
+    #history{
+        margin-top: 30px;
+        border: 1px dotted white;
+        text-align: left;
+        font-size: 20px;
+        background-color: gray;
+        color: white;
+        width: 63.5vw;
+    }
+    button{
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    p{
+        font-size : 15px;
+    }
+</style>
+<body>
+    <h1>To Do List</h1>
+    <input type="text" id="doList" style="width: 50vw;">
+    <button type="button" onclick="saveList()">ListUp</button>
+    <!-- 체크된 항목을 삭제 하는 버튼 -->
+    <button type="button" onclick="deleteElements()">DeleteAll</button>
+    <br>
+    <br>
+    <h2>LIST</h2>
+    <div id="list">
+
+    </div>
+
+    <h2>HISTORY</h2>
+
+    <div id="history">
+
+    </div>
+    <script>
+        function saveList(){
+
+            //input element 가져오기
+            let doList = document.getElementById('doList');
+            
+            let p = document.createElement('p');
+            //<p>doList.value</p>
+            p.textContent = doList.value;
+            
+            //input -> text, password, email, checkbox, radio
+            let ckb = document.createElement('input');
+            ckb.setAttribute('type', 'checkbox');
+            p.prepend(ckb);
+
+            let btn = document.createElement('button');
+            btn.textContent = "Complete";
+            //button 이벤트 부여(setAttribute)
+            btn.setAttribute('onclick', 'move()');
+            btn.setAttribute('type','button');
+            //<p> <checkbox> text <buttn></p>
+            p.appendChild(btn);
+
+            let list = document.getElementById('list');
+
+            list.appendChild(p);            
+        }
+
+        function move(){
+            //이동
+            let history = document.getElementById('history');
+            checkedtoggle();
+            event.target.setAttribute('onclick', 'before()');
+            event.target.textContent = "History"
+            history.appendChild(event.target.parentNode);
+
+
+        }
+
+        function before(){
+            let list = document.getElementById('list');
+            checkedtoggle();
+            event.target.setAttribute('onclick', 'move()'); 
+            event.target.textContent = "Compelete"
+            list.appendChild(event.target.parentNode);
+        }
+
+        function deleteElements(){
+            let ckb = document.querySelectorAll('input[type=checkbox]:checked');
+            for(let i of ckb){
+                i.parentNode.remove();
+            }
+        }
+
+        function checkedtoggle(){
+            let ckb = document.querySelectorAll('input[type=checkbox]:checked');
+            for(let i of ckb){
+                //체크 박스 해제
+                i.checked= false;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -23,12 +23,13 @@
     <input type="text" id="location">
     <button type="button" id="btn" class="btn btn-primary" onclick="findFood()">검색</button>
     <script>
+        //크로스오리진 문제 https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-CORS-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%F0%9F%91%8F => 서버서버로 받기, or 허락받기 or 프록시서버
         function findFood(){
             let loc = document.getElementById('location').value;
             let url = `https://www.daegufood.go.kr/kor/api/tasty.html?mode=json&addr=${loc}`
             fetch(url,{
                 mode:'cors'
-                //크로스오리진 문제 https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-CORS-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%F0%9F%91%8F
+                
             })
             .then(res => res.json())
             .then(data => {

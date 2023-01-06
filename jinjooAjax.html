@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        @font-face {
+            font-family: 'GyeonggiBatang';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            font-family: 'GyeonggiBatang';
+            font-size: xx-large;
+        }
+
+        .card-text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    </style>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- <div class="card" style="width:400px">
+                <img class="card-img-top" src="img_avatar1.png" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4> => 축제이름
+                <p class="card-text">Some example text.</p> => 축제설명
+                <a href="#" class="btn btn-primary">See Profile</a> => 홈페이지
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        $.ajax({
+            //프록시서버url : https://api.allorigins.win/raw?url= 
+            url: 'https://api.allorigins.win/raw?url=https://www.jinju.go.kr/openapi/tour/festival.do',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.results)
+                for (let info of data.results) {
+                    $('.row').append(
+                        $('<div>').addClass('card').css('width', '400px').append(
+                            $('<img>').attr({
+                                'class': 'card-img-top',
+                                'src': info.images[9],
+                                'alt': 'Card Img',
+                            }),
+                            $('<div>').addClass('card-body').append(
+                                $('<h4>').addClass('card-title').text(info.name),
+                                $('<p>').addClass('card-text').text(info.content),
+                                $('<a>').attr({
+                                    'href': info.homepage,
+                                    'class': 'btn btn-primary'
+                                }).text('홈페이지')
+                            )
+                        )
+
+                    )
+                }
+
+
+
+            },
+            error: function (error) {
+                console.log(error)
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        @font-face {
+            font-family: 'UhBeeQUEENJ';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeQUEENJ.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            font-family: 'UhBeeQUEENJ';
+            font-size: xx-large;
+        }
+    </style>
+
+<body>
+    <div class="container">
+        <div id="title">
+            <h1> 수도권 미세먼지 / 초미세먼지 농도 </h1>
+        </div><br>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>지역</th>
+                        <th>미세먼지 농도/대기질</th>
+                        <th>초미세먼지 농도/대기질</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $.ajax({
+            url: 'http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.RealtimeCityAir.row)
+                for (let info of data.RealtimeCityAir.row) {
+                    let pm10Result;
+                    let pm25Result;
+                    //미세먼지 좋음 나쁨
+                    if (info.PM10 <= 100) {
+                        pm10Result = '좋음'
+                    } else if (info.PM10 > 100) {
+                        pm10Result = '나쁨'
+                    }
+                    //초미세먼지 좋음 나쁨
+                    if (info.PM25 <= 35) {
+                        pm25Result = '좋음'
+                    } else if (info.PM25 > 35) {
+                        pm25Result = '나쁨'
+                    }
+
+                    $('tbody').append(
+                        $('<tr>').append(
+                            $('<td>').text(info.MSRSTE_NM),
+                            $('<td>').text(`${info.PM10}/${pm10Result}`),
+                            $('<td>').text(`${info.PM25}/${pm25Result}`)
+                        )
+                    )
+
+                    $('table').css({'text-align': 'center',
+                                     'border': '3px solid #C7BDC1'})
+                    $('.container h1').css({'text-align': 'center'})
+                    $('tbody tr:even').css('background-color', '#FAEDF2')
+                    $('#title').css('border', '4px solid #C7BDC1')
+
+                }
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+
+    </script>
+</body>
+
+</html>

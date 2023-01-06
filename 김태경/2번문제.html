@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        @font-face {
+            font-family: 'UhBeeQUEENJ';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeQUEENJ.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            font-family: 'UhBeeQUEENJ';
+            font-size: xx-large;
+        }
+
+        #list {
+            border: 1px dotted white;
+            text-align: left;
+            font-size: 40px;
+            background-color: blueviolet;
+            color: white;
+            width: 63.5vw;
+        }
+
+        #history {
+            margin-top: 30px;
+            border: 1px dotted white;
+            text-align: left;
+            font-size: 40px;
+            background-color: gray;
+            color: white;
+            width: 63.5vw;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 40px;
+        }
+    </style>
+
+<body>
+    <h1>To Do List</h1>
+    <input type="text" id="doList" style="width: 50vw;">
+    <button type="button" onclick="saveList()">ListUp</button>
+    <!-- 체크된 항목을 삭제 하는 버튼 -->
+    <button type="button" onclick="deleteElements()">DeleteAll</button>
+    <br>
+    <br>
+    <h2>LIST</h2>
+    <div id="list">
+
+    </div>
+
+    <h2>HISTORY</h2>
+
+    <div id="history">
+
+    </div>
+    <script>
+        //리스트에 올리기
+        function saveList() {
+            $('#list').append(
+                $('<p>')
+                .text($('#doList').val())
+                .prepend(
+                    $('<input>').attr('type', 'checkbox')
+                )
+                .append(
+                    $('<button>')
+                    .attr('type', 'button')
+                    .text('Complete')
+                    .click(function () {
+                        //Complete의 버튼 이벤트
+                        //checkedtoggle();
+                        console.log($(this).parent().children()[0])
+                        let ck = $(this).parent().children()[0]
+                        $(ck).prop('checked', false)
+                        //이름바뀜
+                        $(this).text('Delete')
+
+                        
+                        //체크시 삭제
+                        $(this).click(function () {
+                            $(this).parent().remove();
+                        })
+
+                        //히스토리 이동
+                        $('#history').append(
+                            $(this).parent()
+                            
+                        )
+
+                    })
+                )
+            )
+        }
+
+        //히스토리 체크된 항목 모두 삭제 
+        function deleteElements(){
+            let cks = $('input[type=checkbox]:checked')
+            for(let ck of cks){
+                $(ck).parent().remove()
+            }
+        }
+    </script>
+</body>
+
+</html>
